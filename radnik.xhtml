@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Radnik</title>
+        <h:outputStylesheet name="css/css.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <h:form>
+            
+            <h2>Predlozi</h2>
+            <h:dataTable value="#{pmb.predlozi}" var="p">
+                <h:column class="#{(p.glasovi gt 2) ? 'green' : ''}">
+                    <f:facet name="header">Životinja</f:facet>
+                    #{p.zivotinja}
+                </h:column>
+                <h:column class="#{(p.glasovi gt 2) ? 'green' : ''}">
+                    <f:facet name="header">Posetilac</f:facet>
+                    #{p.posetilac}
+                </h:column>
+                <h:column class="#{(p.glasovi gt 2) ? 'green' : ''}">
+                    <f:facet name="header">Komentar</f:facet>
+                    #{p.komentar}
+                </h:column>
+                <h:column class="#{(p.glasovi gt 2) ? 'green' : ''}">
+                    <f:facet name="header">Glasovi</f:facet>
+                    #{p.glasovi}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Odobri</f:facet>
+                    <h:commandButton action="#{rmb.approve(p)}" rendered="#{not p.odobren}"></h:commandButton>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Odbaci</f:facet>
+                    <h:commandButton action="#{rmb.reject(p)}" rendered="#{not p.odobren}" value="Odbaci"></h:commandButton>
+                </h:column>
+                
+            </h:dataTable>  
+            
+            <p>
+            <h:commandButton action="#{lmb.logout()}" value="Odjavi se"></h:commandButton>
+            </p>
+            
+        </h:form>
+    </h:body>
+</html>

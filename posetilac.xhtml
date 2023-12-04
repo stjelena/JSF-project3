@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Posetilac</title>
+        <h:outputStylesheet name="css/css.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <h:form>
+            
+            <h2>Životinje</h2>
+            <h:dataTable value="#{pmb.zivotinje}" var="z">
+                <h:column>
+                    <f:facet name="header">Životinja</f:facet>
+                    #{z.naziv}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Težina</f:facet>
+                    #{z.tezina}
+                </h:column>
+            </h:dataTable>
+            <h2>Predlozi</h2>
+            <h:dataTable value="#{pmb.predlozi}" var="p">
+                <h:column>
+                    <f:facet name="header">Životinja</f:facet>
+                    #{p.zivotinja}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Posetilac</f:facet>
+                    #{p.posetilac}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Komentar</f:facet>
+                    #{p.komentar}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Glasovi</f:facet>
+                    #{p.glasovi}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Glasaj</f:facet>
+                    <h:commandButton rendered="#{not p.glasao}" action="#{pmb.vote(p)}" value="ZA"></h:commandButton>
+                </h:column>
+                
+            </h:dataTable>
+            
+            <h2>Novi predlog</h2>
+            <p>
+                <label for="zivotinja">Zivotinja: </label>
+                <h:inputText value="#{pmb.zivotinja}" id="zivotinja"></h:inputText>
+            </p>
+            
+            <p>
+                <label for="komentar">Komentar: </label>
+                <h:inputText value="#{pmb.komentar}" id="komentar"></h:inputText>
+            </p>
+            
+            <p>
+                <h:commandButton action="#{pmb.suggest()}" value="Predlozi"></h:commandButton>
+            </p>
+            
+            <p>
+            <h:commandButton action="#{lmb.logout()}" value="Odjavi se"></h:commandButton>
+            </p>
+            
+        </h:form>
+    </h:body>
+</html>
+
